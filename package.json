@@ -1,6 +1,6 @@
 {
   "name": "clclean",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Delete pictures from cloudinary",
   "main": "index.js",
   "bin": {
