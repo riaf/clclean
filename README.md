@@ -15,7 +15,7 @@ see `config.json.dist`
 How to use
 ----------
 
-**Dry dun***
+**Dry dun**
 
 ```sh
 node index.js
@@ -29,13 +29,8 @@ NODE_ENV=production node index.js
 ```
 
 
-TODO
-----
-
-### next_cursor from opt (continue mode)
-
-**Example**
+**next_cursor from opt (continue mode)**
 
 ```
-node index.js --next_cursor={{ next_cursor }}
+node index.js --next-cursor={{ next_cursor }}
 ```

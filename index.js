@@ -1,7 +1,9 @@
 var cloudinary = require('cloudinary')
   , _ = require('lodash')
   , moment = require('moment')
+  , argv = require('yargs').argv
   , config = require('./config')
+  , next_cursor = argv['next-cursor'] || null
   , now = moment()
   , is_target = function(resource) {
       var created_at = moment(resource.created_at);
@@ -53,5 +55,6 @@ clean = function(result) {
 };
 
 cloudinary.api.resources(clean, {
-  max_results: 500
+  max_results: 500,
+  next_cursor: next_cursor
 });

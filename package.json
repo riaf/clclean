@@ -1,6 +1,6 @@
 {
   "name": "clclean",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Delete pictures from cloudinary",
   "main": "index.js",
   "scripts": {
@@ -22,6 +22,7 @@
   "dependencies": {
     "cloudinary": "1.0.*",
     "lodash": "2.4.*",
-    "moment": "2.5.*"
+    "moment": "2.5.*",
+    "yargs": "~1.2.1"
   }
 }
