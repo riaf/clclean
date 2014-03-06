@@ -43,7 +43,7 @@ clean = function(result) {
     console.log('Delete targets:', delete_ids);
   }
 
-  if (result.rate_limit_remaining > 50 && result.next_cursor) {
+  if (result.rate_limit_remaining > config.economize && result.next_cursor) {
     console.log('Next cursor', result.next_cursor);
     cloudinary.api.resources(clean, {
       max_results: 500,
