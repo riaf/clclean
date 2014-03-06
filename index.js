@@ -8,6 +8,13 @@ var cloudinary = require('cloudinary')
 
       return (now.unix() - created_at.unix()) > config.moment;
     }
+  , reshape = function(array, n) {
+      if (array.length === 0) {
+        return [];
+      }
+
+      return [_.first(array, n)].concat(reshape(_.rest(array, n), n));
+    }
   , clean;
 
 // configure
@@ -27,9 +34,11 @@ clean = function(result) {
   }
 
   if (process.env.NODE_ENV === 'production' && delete_ids.length) {
-    cloudinary.api.delete_resources(delete_ids, function(response) {
-      console.log(response);
-    }, { type: config.type });
+    _(reshape(delete_ids, 100)).each(function(ids) {
+      cloudinary.api.delete_resources(ids, function(response) {
+        console.log(response);
+      }, { type: config.type });
+    });
   } else {
     console.log('Delete targets:', delete_ids);
   }
@@ -37,9 +46,12 @@ clean = function(result) {
   if (result.rate_limit_remaining > 50 && result.next_cursor) {
     console.log('Next cursor', result.next_cursor);
     cloudinary.api.resources(clean, {
+      max_results: 500,
       next_cursor: result.next_cursor
     });
   }
 };
 
-cloudinary.api.resources(clean);
+cloudinary.api.resources(clean, {
+  max_results: 500
+});
