@@ -1,0 +1,27 @@
+{
+  "name": "clclean",
+  "version": "0.0.1",
+  "description": "Delete pictures from cloudinary",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/riaf/clclean.git"
+  },
+  "keywords": [
+    "cloudinary"
+  ],
+  "author": "Keisuke SATO <riafweb@gmail.com>",
+  "license": "BSD",
+  "readmeFilename": "README.md",
+  "bugs": {
+    "url": "https://github.com/riaf/clclean/issues"
+  },
+  "dependencies": {
+    "cloudinary": "1.0.*",
+    "lodash": "2.4.*",
+    "moment": "2.5.*"
+  }
+}
