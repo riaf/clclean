@@ -1,0 +1,15 @@
+#!/usr/bin/env node
+
+var clclean = require('../')
+  , argv = require('yargs').argv
+
+clclean(argv).on('error', function(e) {
+  console.log(e);
+}).on('targets', function(targets) {
+  console.log('Delete targets:', targets);
+}).on('next', function(cursor) {
+  console.log('Next cursor: ' + cursor);
+}).on('deleted', function(response) {
+  console.log('Deleted', response);
+});
+

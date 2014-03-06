@@ -1,36 +1,54 @@
 clclean [![Gitter chat](https://badges.gitter.im/riaf/clclean.png)](https://gitter.im/riaf/clclean)
 =======
 
-* 以下の条件に当てはまる cloudinary の画像を消す
-    * type={{ config.type }}
-    * created_at が {{ config.moment }} 秒より古いもの
+clclean deletes the old images from cloudinary.
 
 
-Configure
----------
+Installation
+------------
 
-see `config.json.dist`
+```sh
+npm -g install clclean
+```
 
 
 How to use
 ----------
 
-**Dry dun**
-
 ```sh
-node index.js
+clclean --cloudname=YOUR_CLOUD_NAME --apikey=YOUR_API_KEY --secret=YOUR_API_SECRET
 ```
 
 
-**Delete**
+**Dry dun**
 
 ```sh
-NODE_ENV=production node index.js
+clclean --cloudname=YOUR_CLOUD_NAME --apikey=YOUR_API_KEY --secret=YOUR_API_SECRET --dry-run
 ```
 
 
 **next_cursor from opt (continue mode)**
 
 ```
-node index.js --next-cursor={{ next_cursor }}
+clclean --cloudname=YOUR_CLOUD_NAME --apikey=YOUR_API_KEY --secret=YOUR_API_SECRET --dry-run --cursor=NEXT_CURSOR
 ```
+
+
+Options
+-------
+
+**default**
+
+```json
+{
+    "cursor": null,
+    "cloudname": null,
+    "apikey": null,
+    "secret": null,
+    "dry-run": false,
+    "type": "fetch",
+    "moment": 86400,
+    "economize": 50
+}
+```
+
