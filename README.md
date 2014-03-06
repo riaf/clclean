@@ -1,4 +1,4 @@
-clclean
+clclean [![Gitter chat](https://badges.gitter.im/riaf/clclean.png)](https://gitter.im/riaf/clclean)
 =======
 
 * 以下の条件に当てはまる cloudinary の画像を消す
