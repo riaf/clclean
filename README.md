@@ -1,4 +1,4 @@
-clclean [![Gitter chat](https://badges.gitter.im/riaf/clclean.png)](https://gitter.im/riaf/clclean)
+clclean [![Code Climate](https://codeclimate.com/github/riaf/clclean.png)](https://codeclimate.com/github/riaf/clclean) [![Gitter chat](https://badges.gitter.im/riaf/clclean.png)](https://gitter.im/riaf/clclean)
 =======
 
 clclean deletes the old images from cloudinary.
@@ -30,7 +30,7 @@ clclean --cloudname=YOUR_CLOUD_NAME --apikey=YOUR_API_KEY --secret=YOUR_API_SECR
 **next_cursor from opt (continue mode)**
 
 ```
-clclean --cloudname=YOUR_CLOUD_NAME --apikey=YOUR_API_KEY --secret=YOUR_API_SECRET --dry-run --cursor=NEXT_CURSOR
+clclean --cloudname=YOUR_CLOUD_NAME --apikey=YOUR_API_KEY --secret=YOUR_API_SECRET --moment=7776000 --cursor=NEXT_CURSOR
 ```
 
 
