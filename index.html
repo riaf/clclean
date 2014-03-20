@@ -1,0 +1,105 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>clclean by riaf</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/main.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  </head>
+  <body>
+
+      <header>
+        <h1>clclean</h1>
+        <p>deletes the old images from cloudinary.</p>
+      </header>
+
+      <div id="banner">
+        <span id="logo"></span>
+
+        <a href="https://github.com/riaf/clclean" class="button fork"><strong>View On GitHub</strong></a>
+        <div class="downloads">
+          <span>Downloads:</span>
+          <ul>
+            <li><a href="https://github.com/riaf/clclean/zipball/master" class="button">ZIP</a></li>
+            <li><a href="https://github.com/riaf/clclean/tarball/master" class="button">TAR</a></li>
+          </ul>
+        </div>
+      </div><!-- end banner -->
+
+    <div class="wrapper">
+      <nav>
+        <ul></ul>
+      </nav>
+      <section>
+        <h1>
+<a name="clclean--" class="anchor" href="#clclean--"><span class="octicon octicon-link"></span></a>clclean <a href="https://codeclimate.com/github/riaf/clclean"><img src="https://codeclimate.com/github/riaf/clclean.png" alt="Code Climate"></a> <a href="https://gitter.im/riaf/clclean"><img src="https://badges.gitter.im/riaf/clclean.png" alt="Gitter chat"></a>
+</h1>
+
+<p>clclean deletes the old images from cloudinary.</p>
+
+<h2>
+<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
+
+<div class="highlight highlight-sh"><pre>npm -g install clclean
+</pre></div>
+
+<h2>
+<a name="how-to-use" class="anchor" href="#how-to-use"><span class="octicon octicon-link"></span></a>How to use</h2>
+
+<div class="highlight highlight-sh"><pre>clclean --cloudname<span class="o">=</span>YOUR_CLOUD_NAME --apikey<span class="o">=</span>YOUR_API_KEY --secret<span class="o">=</span>YOUR_API_SECRET
+</pre></div>
+
+<p><strong>Dry dun</strong></p>
+
+<div class="highlight highlight-sh"><pre>clclean --cloudname<span class="o">=</span>YOUR_CLOUD_NAME --apikey<span class="o">=</span>YOUR_API_KEY --secret<span class="o">=</span>YOUR_API_SECRET --dry-run
+</pre></div>
+
+<p><strong>next_cursor from opt (continue mode)</strong></p>
+
+<pre><code>clclean --cloudname=YOUR_CLOUD_NAME --apikey=YOUR_API_KEY --secret=YOUR_API_SECRET --moment=7776000 --cursor=NEXT_CURSOR
+</code></pre>
+
+<h2>
+<a name="options" class="anchor" href="#options"><span class="octicon octicon-link"></span></a>Options</h2>
+
+<p><strong>default</strong></p>
+
+<div class="highlight highlight-json"><pre><span class="p">{</span>
+    <span class="nt">"cursor"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="nt">"cloudname"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="nt">"apikey"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="nt">"secret"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="nt">"dry-run"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="nt">"type"</span><span class="p">:</span> <span class="s2">"fetch"</span><span class="p">,</span>
+    <span class="nt">"moment"</span><span class="p">:</span> <span class="mi">86400</span><span class="p">,</span>
+    <span class="nt">"economize"</span><span class="p">:</span> <span class="mi">50</span>
+<span class="p">}</span>
+</pre></div>
+      </section>
+      <footer>
+        <p>Project maintained by <a href="https://github.com/riaf">riaf</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></small></p>
+      </footer>
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-288900-25");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>
