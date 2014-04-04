@@ -20,6 +20,7 @@ module.exports = function(options) {
     , clean;
 
   options = _.assign({
+    "initialize": true,
     "cursor": null,
     "cloudname": null,
     "apikey": null,
@@ -43,6 +44,8 @@ module.exports = function(options) {
   clean = function(result) {
     var delete_ids = [];
 
+    e.emit('debug', { type: 'api', response: result, request_type: 'resources' });
+
     if (result.resources && result.resources.length) {
       _(result.resources).each(function(resource) {
         if (resource.type === options.type && is_target(resource)) {
@@ -50,33 +53,39 @@ module.exports = function(options) {
         }
       });
     } else {
+      e.emit('error', { message: 'No results.' });
       return;
     }
 
-    e.emit('targets', delete_ids);
+    e.emit('debug', { type: 'delete_targets', targets: delete_ids });
 
     if (!options['dry-run'] && delete_ids.length) {
       _(reshape(delete_ids, 100)).each(function(ids) {
         cloudinary.api.delete_resources(ids, function(response) {
-          e.emit('deleted', response);
+          e.emit('debug', { type: 'api', response: response, request_type: 'delete_resources' });
+          e.emit('info', { rate_limit_remaining: response.rate_limit_remaining });
         }, { type: options.type });
       });
     }
 
     if (result.rate_limit_remaining > options.economize && result.next_cursor) {
-      e.emit('next', result.next_cursor);
+      e.emit('info', { rate_limit_remaining: result.rate_limit_remaining });
 
       cloudinary.api.resources(clean, {
         max_results: 500,
         next_cursor: result.next_cursor
-      });
+      }, { type: options.type });
     }
   };
+
+  cloudinary.api.usage(function(result){
+    e.emit('initialize', result);
+  });
 
   cloudinary.api.resources(clean, {
     max_results: 500,
     next_cursor: options.cursor
-  });
+  }, { type: options.type });
 
   return e;
 };

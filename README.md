@@ -48,6 +48,7 @@ Options
     "dry-run": false,
     "type": "fetch",
     "moment": 86400,
+    "verbose": false,
     "economize": 50
 }
 ```

@@ -1,15 +1,78 @@
 #!/usr/bin/env node
 
 var clclean = require('../')
+  , charm = require('charm')()
   , argv = require('yargs').argv
+  , verbose = argv.verbose ? true : false
+  , progress = {
+      fetched: 0,
+      deleted: 0,
+      rate_limit_remaining: 0,
+      next_cursor: ''
+    }
+  , display = function(init) {
+      if (!init && !verbose) {
+        charm.up(5);
+      }
+
+      charm.write("\n");
+      charm.erase('line');
+      charm.display('underscore').write('Fetched');
+      charm.display('reset').write('  ' + progress.fetched);
+      charm.write("\n");
+      charm.erase('line');
+      charm.display('underscore').write('Deleted (or will delete on dry-run)');
+      charm.display('reset').write('  ' + progress.deleted);
+      charm.write("\n");
+      charm.erase('line');
+      charm.display('underscore').write('API Remaining');
+      charm.display('reset').write('  ' + progress.rate_limit_remaining);
+      charm.write("\n");
+      charm.erase('line');
+      charm.display('underscore').write('Next cursor');
+      charm.display('reset').write('  ' + progress.next_cursor);
+      charm.write("\n");
+    };
+
+console.log("\n\n\n");
+charm.pipe(process.stdout);
+charm.on('^C', process.exit);
 
 clclean(argv).on('error', function(e) {
-  console.log(e);
-}).on('targets', function(targets) {
-  console.log('Delete targets:', targets);
-}).on('next', function(cursor) {
-  console.log('Next cursor: ' + cursor);
-}).on('deleted', function(response) {
-  console.log('Deleted', response);
+  console.err('Error', e);
+}).on('initialize', function(data) {
+  if (verbose) {
+    console.log(data);
+  }
+  display();
+}).on('info', function(data) {
+  if (data.rate_limit_remaining) {
+    progress.rate_limit_remaining = data.rate_limit_remaining;
+  }
+  if (!verbose) {
+    display();
+  }
+}).on('debug', function(data) {
+  if (verbose) {
+    console.log(data);
+  }
+
+  if (data.request_type) {
+    switch (data.request_type) {
+      case 'resources':
+        progress.fetched += data.response.resources.length;
+        if (data.response.next_cursor) {
+          progress.next_cursor = data.response.next_cursor;
+        }
+        break;
+      case 'delete_resources':
+        progress.deteted += data.response.deleted.length;
+        break;
+    }
+  } else if (data.targets) {
+    progress.deleted += data.targets.length;
+  }
+
+  display();
 });
 
